@@ -1,5 +1,6 @@
 package cs2901.utec.chat_mobile;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -33,6 +34,10 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    public Activity getActivity(){
+        return this;
+    }
+
     public void onBtnLoginClicked(View view) {
         // 1. Getting username and password inputs from view
         EditText txtUsername = (EditText) findViewById(R.id.txtUsername);
@@ -59,13 +64,17 @@ public class LoginActivity extends AppCompatActivity {
                     //TODO
                     try {
                         String message = response.getString("message");
+                        System.out.println(message);
                         if(message.equals("Authorized")) {
-                            showMessage("Authenticated");
+                            System.out.println("Gogogo!");
+                            showMessage("Authenticated bro!!");
+                            Intent i = new Intent(getActivity(), ContactsActivity.class);
+                            startActivity(i);
                         }
                         else {
-                            showMessage("Wrong username or password");
+                            showMessage("Wrong username or password dude");
                         }
-                        showMessage(response.toString());
+                        //showMessage(response.toString());
                     }catch (Exception e) {
                         e.printStackTrace();
                         showMessage(e.getMessage());
@@ -77,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
                     if( error instanceof  AuthFailureError ){
-                        showMessage("Unauthorized");
+                        showMessage("Unauthorized dude!!");
                     }
                     else {
                         showMessage(error.getMessage());
