@@ -69,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                             System.out.println("Gogogo!");
                             showMessage("Authenticated bro!!");
                             Intent i = new Intent(getActivity(), ContactsActivity.class);
+                            i.putExtra("user_id", response.getInt("user_id"));
+                            i.putExtra("username", response.getString("username"));
                             startActivity(i);
                         }
                         else {
